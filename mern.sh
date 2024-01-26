@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Update apt package manager
+echo "Updating apt package manager..."
 sudo apt update
 
 # Install Node.js and npm
@@ -22,6 +23,7 @@ case $NODE_VERSION_CHOICE in
     *) echo "Invalid choice. Installing the latest version.";;
 esac
 
+echo "Installing Node.js and npm..."
 curl -fsSL https://deb.nodesource.com/setup_$NODE_VERSION | sudo -E bash -
 sudo apt install -y nodejs
 
@@ -32,18 +34,22 @@ echo "Choose npm version to install (enter the number):
 read -p "Enter the number: " NPM_VERSION_CHOICE
 
 case $NPM_VERSION_CHOICE in
-    1) npm install -g npm@20.*;; # Install npm version 20.*
+    1) echo "Installing npm version 20.*..."
+       npm install -g npm@20.*;;
     2) echo "Skipping npm installation.";;
     *) echo "Invalid choice. Skipping npm installation.";;
 esac
 
 # Install MongoDB
+echo "Installing MongoDB..."
 sudo apt install -y mongodb
 
 # Start MongoDB service
+echo "Starting MongoDB service..."
 sudo systemctl start mongodb
 
 # Enable MongoDB to start on boot
+echo "Enabling MongoDB to start on boot..."
 sudo systemctl enable mongodb
 
 echo "Setup complete. Node.js, npm, and MongoDB are installed. You can now start using them for your projects."
